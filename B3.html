@@ -1,0 +1,34 @@
+<script>
+var credit = prompt('amount of credit');
+var percent = prompt('percent per year');
+var time = prompt('credit period');
+var sum = 0;
+var percent_m = percent/100/12;      
+var credit_body = [];
+var credit_tax = [];
+var x=0;
+var y=0;
+var delta = 0;
+sum = (credit * percent_m / (1 - (1 + percent_m)**(-time))).toFixed(2);
+var total = sum * time;
+for(var i = 1; i<=time; i++){
+credit_tax[i] = +(credit * percent_m).toFixed(2);
+credit_body[i] = +(sum - credit_tax[i]).toFixed(2);
+credit -= Number(credit_body[i]);
+x +=Number(credit_tax[i]);
+y +=Number(credit_body[i]);
+}
+delta = Number(total - x - y);
+credit_tax[time] = Number(credit_tax[time]) + Number(delta);
+credit_tax[time] = (Number(credit_tax[time])).toFixed(2);
+credit_tax[time]=Number(credit_tax[time]);
+for(i = 1; i<=time; i++){
+   
+    console.log(`Payment${i} \n body : ${credit_body[i]}; credit : ${credit_tax[i]}; total : ${(credit_body[i]+credit_tax[i]).toFixed(2)}`)
+    
+}
+
+console.log(total);
+</script>
+    
+   
